@@ -1,0 +1,38 @@
+Install and update (Windows)
+----------------------------
+Keep this folder together: the setup program copies game_files\ from the
+folder it runs in. Run Ssx3-@VERSION@-setup.exe. It installs for your user
+only (no administrator rights) to %LOCALAPPDATA%\Programs\Ssx3 and adds a
+Start Menu entry. Running a newer setup installs on top and keeps your
+saves. Uninstall from Settings > Apps; your saves and settings stay in
+%LOCALAPPDATA%\Ssx3.
+
+Windows may warn before running the setup program or Ssx3.exe: they are
+built on your machine and not signed. SmartScreen: "More info" > "Run
+anyway". If the folder came as a .zip downloaded or copied from another
+machine, right-click the .zip > Properties > Unblock before extracting
+(Mark of the Web), or Windows asks again for every file.
+
+To keep saves and settings somewhere else, set SSX3_DATA_DIR (a Windows
+environment variable) to that folder before starting the game.
+
+Settings
+--------
+This build has no options file. Launcher settings are KEY=value lines in
+config\launch.env in %LOCALAPPDATA%\Ssx3; launch.env.default in the install
+folder lists the defaults.
+
+Note: this is an early port. It has been tested on a Mac (Metal) with a
+scripted controller from the title screen into a race. This Direct3D 11
+build has not been run yet, under Proton (DXVK) or on native Windows, and
+a full play-through has not been tried. On a Steam Deck use the steamos
+bundle: its README has the Deck notes.
+
+Controls
+--------
+Use a controller (XInput pad 1). The game reads only the pad.
+
+Speed
+-----
+The game steps a fixed amount per frame. On a machine that cannot keep up,
+races play in slow motion but correctly.

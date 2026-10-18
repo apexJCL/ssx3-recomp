@@ -1,0 +1,20 @@
+# Changelog
+
+What changed for players in each release of the SSX 3 static
+recompilation, newest first, in the style of
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Releases are
+tagged `vYEAR.MONTH.N`, with `-rc.N` for release candidates, and each
+release's section (`## [YEAR.MONTH.N] - date`) is its notes on the
+[releases page](https://github.com/apexJCL/ssx3-recomp/releases); the
+release workflow stops when a tag has none.
+No release contains game data: you build the game from your own disc.
+
+## [Unreleased]
+
+### Added
+- The game boots through the front end into a race on macOS (Metal), with
+  a controller. The Windows build (Direct3D 11, also for Linux through
+  Proton) builds and packages, and has not been run yet.
+- Bundles for Windows, SteamOS and macOS (`./ssx3 package`), with your own
+  disc inside; the controller works without any setting.
+- The build wizard's settings for this game, ready for the first release.

@@ -1,0 +1,31 @@
+[
+  {
+    "start": "0x00274D8F",
+    "source": "XPP USB host init ('USBH' pool tag), follows a ret with no padding; ICALL miss on the first Metal run",
+    "observed": true
+  },
+  {
+    "start": "0x0027561D",
+    "source": "XPP USB class-driver method table in the XPP code section, which disasm does not scan for pointers: memory unit RemoveDevice (table 0x002743E8); USA match of koenhendriks's PAL seed"
+  },
+  {
+    "start": "0x0027990B",
+    "source": "XPP USB class-driver method table in the XPP code section, which disasm does not scan for pointers: hub AddDevice (table 0x0027447C); USA match of koenhendriks's PAL seed"
+  },
+  {
+    "start": "0x0027BC3D",
+    "source": "XPP USB class-driver method table in the XPP code section, which disasm does not scan for pointers: method table 0x002744F0; USA match of koenhendriks's PAL seed"
+  },
+  {
+    "start": "0x0027BC8F",
+    "source": "XPP USB class-driver method table in the XPP code section, which disasm does not scan for pointers: method table 0x00274538; USA match of koenhendriks's PAL seed"
+  },
+  {
+    "start": "0x0027C083",
+    "source": "XPP USB class-driver method table in the XPP code section, which disasm does not scan for pointers: XID/HID RemoveDevice; USA match of koenhendriks's PAL seed"
+  },
+  {
+    "start": "0x0027C6A2",
+    "source": "XPP USB class-driver method table in the XPP code section, which disasm does not scan for pointers: XID/HID AddDevice: without it XAPI configures the pad and never asks for its XID descriptor; USA match of koenhendriks's PAL seed"
+  }
+]
