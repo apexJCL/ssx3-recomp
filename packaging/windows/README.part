@@ -16,17 +16,25 @@ machine, right-click the .zip > Properties > Unblock before extracting
 To keep saves and settings somewhere else, set SSX3_DATA_DIR (a Windows
 environment variable) to that folder before starting the game.
 
-Settings
---------
-This build has no options file. Launcher settings are KEY=value lines in
-config\launch.env in %LOCALAPPDATA%\Ssx3; launch.env.default in the install
-folder lists the defaults.
+Options
+-------
+Your options live in config\config.toml in %LOCALAPPDATA%\Ssx3.
+config.default.toml, in the install folder, lists every option at its
+default. Copy a line from it into your config.toml and change it there,
+for example "scale = 2" under "[render]" to draw at twice the resolution.
+An update replaces config.default.toml but never touches your file.
 
-Note: this is an early port. It has been tested on a Mac (Metal) with a
-scripted controller from the title screen into a race. This Direct3D 11
-build has not been run yet, under Proton (DXVK) or on native Windows, and
-a full play-through has not been tried. On a Steam Deck use the steamos
-bundle: its README has the Deck notes.
+The game starts in a window. "fullscreen = true" under "[present]" in
+your config.toml starts it fullscreen.
+
+Launcher settings are KEY=value lines in config\launch.env in the same
+folder; launch.env.default in the install folder lists the defaults.
+
+Note: this is an early port. This Direct3D 11 build has been played on
+native Windows (races at 60 Hz) and tested under Proton (DXVK) on a Steam
+Deck from the title screen into a race; a full play-through has not been
+tried. On a Steam Deck use the steamos bundle: its README has the Deck
+notes.
 
 Controls
 --------

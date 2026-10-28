@@ -1,5 +1,10 @@
 [
   {
+    "start": "0x000C4A70",
+    "source": "vtable slot 18 of three .rdata vtables (0x00282DB8, 0x00290C50, 0x00290CB8); tail-calling thiscall method (ret 8) right after sub_000C4A10's jmp, no padding; ICALL miss on leaving a replay on native Windows",
+    "observed": true
+  },
+  {
     "start": "0x00274D8F",
     "source": "XPP USB host init ('USBH' pool tag), follows a ret with no padding; ICALL miss on the first Metal run",
     "observed": true

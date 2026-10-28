@@ -1,45 +1,50 @@
 # Written by `xbr new`. Game data, generated code, the toolchain and the
-# bundles never enter git.
+# bundles never enter git. The top-level entries are anchored (/x), and the
+# ones a worktree holds as symlinks to the main checkout's are bare: a
+# trailing-slash line matches a directory only.
 
 # Your dump, and the analysis the pipeline writes beside it; `import`
 # builds the dump beside it first and keeps the old one there until the
 # new one is in place.
-game_files/
-game_files.partial/
-game_files.old/
+/game_files
+/game_files.partial/
+/game_files.old/
 
 # Generated code and its key (`ssx3 package` regenerates when it differs).
-src/recomp/gen/
-src/recomp/gen.key.json
-src/recomp/.gen-regenerating
+/src/recomp/gen/
+/src/recomp/gen.key.json
+/src/recomp/.gen-regenerating
 
 # The pipeline's intermediates.
-analysis/
+/analysis/
 
-# Builds, and the packaging build trees.
-build-win/
-build/
-build-*/
-build-logs/
+# Builds, and the packaging build trees (anchored: a change named
+# openspec/changes/build-*/ is not one).
+/build-win/
+/build/
+/build-*/
+/build-logs/
 
-# `ssx3 setup`: the pinned venv, the toolchain, the toolkit and CLI clones.
-.venv/
-.venv-ghidra/
-third_party/
-external/
-.xbr-pin
+# `ssx3 setup`: the pinned venvs, the toolchain, the toolkit and CLI clones.
+/.venv*
+/third_party
+/external
+/.xbr-pin
+# `ssx3 package`'s stage records in a folder outside git (in a repo
+# they live in the git directory).
+/.xbr/
 
 # `ssx3 package`: private bundles holding the game. Never commit them.
-dist/
+/dist/
 *.dmg
 *.exe
 *.pdb
 *.nsi
 *.tar
 
-# The bench host.
-bench-logs/
-scripts/bench.env
+# The bench host. Bare: a symlink to the workspace's one store.
+bench-logs
+/scripts/bench.env
 
 # Game data, captures and game output, anywhere in the tree.
 *.xbe
@@ -92,3 +97,7 @@ __pycache__/
 .DS_Store
 
 # --- this game ---
+# Your own options and launcher settings in a developer checkout (the
+# defaults are packaging/config.default.toml).
+/config/config.toml
+/config/launch.env

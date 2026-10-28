@@ -41,6 +41,13 @@ if(NOT WIN32)
     find_package(OpenSSL REQUIRED)
 endif()
 
+# The toolkit's enhancements layer (render scale, present filter,
+# fullscreen; config/config.toml over config.default.toml beside the
+# executable). ON for this title, every key stock by default; not FORCE, so
+# -DXBOXRECOMP_ENHANCE=OFF builds a layer-free binary for A/B.
+set(XBOXRECOMP_ENHANCE ON CACHE BOOL
+    "Build the enhancements layer (config.toml, RECOMP_RENDER_SCALE, ...)")
+
 # Add xboxrecomp as a subdirectory -- this builds all 6 runtime libraries
 # and provides the 'xboxrecomp' umbrella target to link against.
 add_subdirectory(${XBOXRECOMP_DIR} ${CMAKE_BINARY_DIR}/xboxrecomp)
@@ -83,17 +90,16 @@ target_link_libraries(${PROJECT_NAME} PRIVATE xboxrecomp)
 
 # The toolkit's opt-in enhancements layer (render scale, present filter,
 # fullscreen; config/config.toml over config.default.toml beside the
-# executable). Configure with -DXBOXRECOMP_ENHANCE=ON to build it; main.c's
+# executable), built while XBOXRECOMP_ENHANCE is on (above); main.c's
 # host_enhance_init then loads it, and without it main.c builds as before.
 if(TARGET xbox_enhance)
     target_link_libraries(${PROJECT_NAME} PRIVATE xbox_enhance)
 endif()
 
-# The option defaults the layer reads beside the executable, once the game
-# has a packaging/config.default.toml (the template ships none). Copied at
-# build time, as a file that depends on packaging/config.default.toml, so a
-# developer build has the defaults layer and an edit of the file refreshes
-# it; a bundle stages the file itself (xbr package).
+# The option defaults the layer reads beside the executable, copied from
+# packaging/config.default.toml at build time as a file that depends on it,
+# so a developer build has the defaults layer and an edit of the file
+# refreshes it; a bundle stages the file itself (xbr package).
 if(EXISTS ${CMAKE_SOURCE_DIR}/packaging/config.default.toml)
     add_custom_command(
         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/config.default.toml

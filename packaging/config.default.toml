@@ -1,0 +1,37 @@
+# SSX 3 options: every key at its default. Each default is the stock
+# behaviour except present.pacing, which sleeps: the frames are the same as
+# the console's spin and it frees a CPU core. The game reads this file on
+# each launch, beside its executable; it is never copied, and an update
+# replaces it, so new keys and defaults reach you. Do not edit it: put the
+# keys you change in config/config.toml (copy a line from here), which the
+# game creates with a short comment the first time and never overwrites.
+# Environment variables (RECOMP_*, config/launch.env in a bundle) override
+# both. Reference: the toolkit's docs/runtime/config.md.
+
+[render]
+scale = 1                 # internal resolution factor: 1 (stock 640x480), 2, 3, 4
+                          # (Metal and Direct3D 11; the software renderer
+                          # ignores it)
+aniso = 0                 # anisotropic filtering on mipmapped textures: 0 (stock,
+                          # off) or 2..16; sharper snow and slopes at a distance
+                          # (Metal and Direct3D 11)
+
+[display]
+aspect = "4:3"            # only 4:3 so far
+# overscan = 0            # guest pixels cut from each side edge, zoomed like a
+                          # TV (0..64). 9 hides the dark border at the sides of
+                          # the title screen, and trims the same 9 columns a
+                          # side from race frames. Needs a toolkit with the key
+
+[present]
+filter = "nearest"        # "nearest" (stock), "linear", "integer"
+fullscreen = false        # true: borderless fullscreen at start
+pacing = "sleep"          # "sleep": the frame wait sleeps until the next vblank,
+                          # which saves CPU and battery; the frames are the
+                          # same. "spin" is the console-original timing: the
+                          # wait holds a CPU core, as on the Xbox. No effect
+                          # yet: SSX 3 is not generated with spin waits
+surface = "auto"          # "auto": the frame-sized surface goes to gamescope for
+                          # it to scale when the SteamOS launcher says it runs
+                          # there (Steam's FSR needs scale = 1 on a Deck);
+                          # "window" (the old behaviour) or "internal"

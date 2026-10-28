@@ -11,11 +11,17 @@ another Mac, Gatekeeper may refuse it: right-click > Open once, or run
 To keep saves and settings somewhere else, set SSX3_DATA_DIR to that folder
 before starting the game.
 
-Settings
---------
-This build has no options file. Launcher settings are KEY=value lines in
-config/launch.env in ~/Library/Application Support/Ssx3; the app's
-Contents/Resources/launch.env.default lists the defaults.
+Options
+-------
+Your options live in config/config.toml in
+~/Library/Application Support/Ssx3. The app's
+Contents/Resources/config.default.toml lists every option at its stock
+value. Copy a line from it into your config.toml and change it there, for
+example "scale = 2" under "[render]" to draw at twice the resolution. An
+update replaces config.default.toml but never touches your file.
+
+Launcher settings are KEY=value lines in config/launch.env in the same
+folder; the app's Contents/Resources/launch.env.default lists the defaults.
 
 Controls
 --------

@@ -13,17 +13,17 @@ ignores the folder.
 
 ## Progress
 
-An early port. On macOS the game boots through the front end into a race
-with a controller.
+An early port. On all three platforms the game boots through the front end
+into a race with a controller.
 
 | Platform | Renderer | State |
 |---|---|---|
-| Linux, Steam Deck (Proton) | Direct3D 11 through DXVK | packaged; not yet run |
+| Linux, Steam Deck (Proton) | Direct3D 11 through DXVK | tested: title screen into a race |
 | macOS (Apple silicon) | Metal | tested: title screen into a race |
-| Windows | Direct3D 11 | builds; not yet tried natively |
+| Windows | Direct3D 11 | played: races at 60 Hz |
 
-Known gaps: the snow has a pink tint, and a full play-through has not been
-tried. Only the USA release is supported.
+Known gaps: the sound stutters a little, and a full play-through has not
+been tried. Only the USA release is supported.
 
 ## Playing
 
@@ -32,6 +32,20 @@ GitHub page carries a build wizard for Windows, macOS and Linux: it fetches
 this source at the release, builds it on your machine and packages it with
 your own disc, so no game code or data is ever downloaded. Until then, build
 from source as below; `./ssx3 package` makes the same bundle.
+
+## Options
+
+The game reads its options from `config.toml`: in a bundle, `config/config.toml`
+in the game's data folder; in a developer checkout, `config/config.toml` in
+the project root. `config.default.toml` (beside the executable,
+`packaging/config.default.toml` here) lists every key at its default;
+copy a line into your `config.toml` to change it, for example
+`scale = 2` under `[render]` to draw at 1280x960. With no `config.toml` the
+game draws as stock. Two defaults are not the layer-free build's:
+`present.pacing = "sleep"` (no effect yet, since SSX 3 is not generated
+with spin waits; `"spin"` is the console-original timing) and
+`present.surface = "auto"`, which in SteamOS Game Mode hands gamescope the
+frame-sized surface to scale instead of a window (`"window"` restores that).
 
 ## Building from source
 

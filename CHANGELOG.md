@@ -18,3 +18,6 @@ No release contains game data: you build the game from your own disc.
 - Bundles for Windows, SteamOS and macOS (`./ssx3 package`), with your own
   disc inside; the controller works without any setting.
 - The build wizard's settings for this game, ready for the first release.
+- Options in `config.toml`: render scale (up to 4x), anisotropic filtering,
+  the present filter and fullscreen. The game draws as stock until you set
+  one; the build wizard offers render scale and fullscreen.

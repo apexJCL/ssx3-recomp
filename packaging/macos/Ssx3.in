@@ -5,8 +5,8 @@
 # settings and logs live in ~/Library/Application Support/Ssx3,
 # so replacing the app (an update) or trashing it (uninstall) keeps them.
 # Settings: Resources/launch.env.default, then config/launch.env (KEY=value
-# lines, yours win). The game is built without the toolkit's enhancements
-# layer, so it reads no config.toml. No lock: this is the game for play.
+# lines, yours win). Options: Resources/config.default.toml, then
+# config/config.toml (RECOMP_CONFIG). No lock: this is the game for play.
 #
 set -euo pipefail
 
@@ -44,12 +44,22 @@ load_env "$DATA/config/launch.env"
 
 mkdir -p "$DATA/config" "$DATA/logs"
 
+# The options chosen in the build wizard (package --seed-config ships them
+# as Resources/config.seed.toml) become config/config.toml only when there
+# is none yet: the player's own file is never replaced, and an update that
+# carries other options leaves it.
+if [ -f "$RES/config.seed.toml" ] && [ ! -e "$DATA/config/config.toml" ]; then
+    cp "$RES/config.seed.toml" "$DATA/config/config.toml"
+fi
+
 keep=${LOG_KEEP:-10}
 ls -1t "$DATA"/logs/game-*.log 2>/dev/null | tail -n +"$keep" | while IFS= read -r old; do rm -f -- "$old"; done || true
 
 # The dump and the emulated hard disk (partition images, the profile).
 export RECOMP_GAME_FILES="$RES/game_files"
 export RECOMP_HDD_DIR="$DATA/hdd"
+# The player's options (config.default.toml in Resources is read under it).
+export RECOMP_CONFIG="$DATA/config/config.toml"
 export RECOMP_STDIO_LOG="$DATA/logs/game-$(date +%Y%m%d-%H%M%S).log"
 
 # Every file the title holds open is a host file, and Launch Services starts
