@@ -25,6 +25,8 @@
         "RECOMP_PAD_SCRIPT": "f190:start,f275:start,f360:start,f445:start,f530:start,f615:start,f700:start,f785:start,f870:start,f1300:start,f1360:start,f1850:start"
       },
       "seconds": 48,
+      "min_flips": 2000,
+      "min_flips_why": "A healthy Deck run makes about 2500 flips in 48 s (20261028-190644: 2527). With the hang it stopped at about 1305, just after the title, which the frames alone only report as INCOMPLETE. The floor turns a hang into a FAIL on an idle host, but only in bench golden (the Deck and Windows): the Metal golden run does not read min_flips, so a hung Metal run still ends INCOMPLETE.",
       "dump_slack": [
         12,
         72

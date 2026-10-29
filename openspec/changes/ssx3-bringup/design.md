@@ -12,8 +12,11 @@
 - **Fence wait:** XDK 5558's `sub_0022F470` spins on
   `(fence ^ PGRAPH[0x400B10]) & 0x1F`. The toolkit writes the fence to bits
   2..6, as later XDKs read it, so the frontend's first BlockOnTime never
-  returned. `recomp_manual.c` replaces the function and compares bits 2..6.
-  It is removed once the toolkit makes the layout a per-XDK choice.
+  returned. `recomp_manual.c` replaced the function to compare bits 2..6
+  until the toolkit learned the layout per XDK. Toolkit 18607bd9 (
+  blinx2-v0.7.0) reads it from D3D's fence pair and writes bits 0..4 for
+  SSX 3, so that override then hung the first load. It was
+  removed, and the lifted function runs as it is.
 - **CRT math:** `exp` and `fmod` replaced natively; the lifted x87 dispatcher
   returns with ebx clobbered (found by the reference on PAL).
 - **Intros:** the movie mask at 0x002F9098 (bit 0 eabig, 1 thx, 2 intro_dj)

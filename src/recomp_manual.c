@@ -91,54 +91,6 @@ void sub_002131E8(void)
     g_esp += 4;
 }
 
-/* ── D3D's wait for the GPU to reach the fence ─────────────── */
-
-/*
- * sub_0022F470(device, wait), stdcall: with wait set, spins until PGRAPH
- * 0x400B10 agrees with the completed-fence word, then returns the pushbuffer
- * position to write from. This XDK (5558) compares the low five bits as they
- * are, `(fence ^ reg) & 0x1F`; later XDKs (BLiNX 2, Burnout 3) compare
- * `((fence << 2) ^ reg) & 0x7C`, and the toolkit keeps the fence in bits 2..6
- * for those. Lifted as is, the spin never ends: the frontend's first
- * BlockOnTime (NOP software method 5 then this wait) hung with the register
- * at 4 and the fence at 0x81. Until the toolkit lets a title pick the layout,
- * this compares bits 2..6 the way the toolkit writes them. The rest is the
- * original, including the stack shape sub_0022F370 reads through.
- */
-extern void sub_0022F370(void);
-
-void sub_0022F470(void)
-{
-    uint32_t dev = MEM32(g_esp + 4);
-    uint32_t pos, saved_esi = g_esi;
-
-    if (MEM32(g_esp + 8)) {
-        uint32_t regs = MEM32(dev + 0x930), fence = MEM32(dev + 0x30);
-        while (((MEM32(regs + 0x400B10) >> 2) ^ MEM32(fence)) & 0x1Fu)
-            RECOMP_BACK_EDGE(0x0022F49Du);
-    }
-    g_esp -= 4;
-    MEM32(g_esp) = saved_esi;
-    g_esi = dev;
-
-    pos = MEM32(MEM32(dev + 0x1C10) + 0x44) | 0x80000000u;
-    if (!(pos >= MEM32(dev + 0x24) && pos < MEM32(dev + 0x28))) {
-        g_eax = MEM32(MEM32(dev + 0x30)) + 2;
-        g_ecx = MEM32(dev + 0x2C);
-        if (g_eax == MEM32(dev + 0x2C)) {
-            pos = MEM32(dev);
-        } else {
-            g_esp -= 4;
-            MEM32(g_esp) = 0x0022F4D4u;
-            sub_0022F370();
-            pos = g_eax ? MEM32(g_eax + 4) : MEM32(g_esi) + 4;
-        }
-    }
-    g_eax = pos;
-    g_esi = MEM32(g_esp);
-    g_esp += 16;   /* pop esi; ret 8 */
-}
-
 /* ── Manual function overrides ─────────────────────────────── */
 
 /*

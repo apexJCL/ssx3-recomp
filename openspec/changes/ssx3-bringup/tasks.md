@@ -7,7 +7,8 @@
 - [ ] Save fixture from an interactive session (the user)
 - [ ] The four #208 cases under `RECOMP_GUEST_LOCK=1`
 - [ ] Proton run on the Steam Deck
-- [ ] Drop the fence override once the toolkit's fence layout is per XDK;
-  BlockOnTime once the toolkit models software method 5
+- [x] Drop the fence override once the toolkit's fence layout is per XDK
+  (with the tracker item)
+- [ ] BlockOnTime once the toolkit models software method 5
 - [ ] Investigate the intermittent STRM crash
 - [ ] PoC PR

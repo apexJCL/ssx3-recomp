@@ -1,5 +1,11 @@
 # SSX 3 static recompilation
 
+> [!TIP]
+> **The easy way, once there is a release:** download `ssx3-wizard-*` for your
+> system from the [latest release](https://github.com/apexJCL/ssx3-recomp/releases/latest),
+> point it at your own USA disc, and it builds the game for you. Until then, see
+> [Playing](#playing) and [Building from source](#building-from-source).
+
 A port of the original Xbox game *SSX 3* to native code with the
 [xboxrecomp](https://github.com/apexJCL/xboxrecomp) toolkit, driven by
 [xboxrecomp-cli](https://github.com/apexJCL/xboxrecomp-cli). The game's
