@@ -11,7 +11,19 @@ No release contains game data: you build the game from your own disc.
 
 ## [Unreleased]
 
+### Changed
+- **The cache partition lives in memory** (`storage.ram_cache = true`, the
+  toolkit's new default for every game): what the game writes to its
+  scratch cache drive while it plays stays in RAM, up to the console's
+  750 MB, instead of being rewritten on your disk. The game sees the same
+  files. `ram_cache = false` under `[storage]` in `config/config.toml`
+  puts them back on the disk.
+
 ### Added
+- **The real audio DSP, on by default.** The game's own sound programs now
+  run on the emulated Xbox audio DSP (reverb, effect sends, the game's own
+  mix) instead of a plain stereo fold. `RECOMP_APU_DSP=0` in
+  `config/launch.env` brings the old sound back.
 - The game boots through the front end into a race on macOS (Metal), with
   a controller. The Windows build (Direct3D 11, also for Linux through
   Proton) builds and packages, and has not been run yet.
